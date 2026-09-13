@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ApiService/ApiService.csproj" Id="003aafcc-4439-4241-a514-836dd714ec8d" />
+  <Project Path="BlazorClient/BlazorClient.csproj" Id="fd631418-39f9-4e78-b028-299c75381985" />
+  <Project Path="DemoApi/DemoApi.csproj" Id="47cc2ec5-a1ca-4d3d-b8b1-3c5dde903ba1" />
+  <Project Path="DemoClient/DemoClient.csproj" Id="af6a546d-b81f-47c0-87dc-22f7ae2bb8a1" />
+</Solution>
