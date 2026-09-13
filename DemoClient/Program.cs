@@ -8,9 +8,11 @@ builder.Services.AddRazorComponents()
 // Configure a named/typed HttpClient targeting the API and injecting the API key
 builder.Services.AddHttpClient("ApiClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7154/"); // Update with your actual API port
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7154/");
     client.DefaultRequestHeaders.Add("X-API-KEY", "SuperSecretApiKey-12345");
 });
+
+
 
 var app = builder.Build();
 

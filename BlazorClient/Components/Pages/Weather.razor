@@ -1,10 +1,10 @@
 ﻿@page "/weather"
 
-@inject IHttpClientFactory ClientFactory
+@inject IHttpClientFactory _clientFactory
 
 <h3>Protected Weather Data</h3>
 
-@if (forecasts == null)
+@if (_forecasts == null)
 {
     <p><em>Loading securely...</em></p>
 }
@@ -20,7 +20,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var forecast in _forecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
@@ -34,14 +34,14 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private WeatherForecast[]? _forecasts;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            var client = ClientFactory.CreateClient("ProtectedApi");
-            forecasts = await client.GetFromJsonAsync<WeatherForecast[]>("api/weather");
+            var client = _clientFactory.CreateClient("ProtectedApi");
+            _forecasts = await client.GetFromJsonAsync<WeatherForecast[]>("api/weather");
         }
         catch (Exception ex)
         {
