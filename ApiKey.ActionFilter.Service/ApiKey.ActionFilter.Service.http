@@ -1,0 +1,6 @@
+@ApiKey.ActionFilter.Service_HostAddress = http://localhost:5226
+
+GET {{ApiKey.ActionFilter.Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
