@@ -1,7 +1,6 @@
 <Solution>
   <Project Path="ApiKey.ActionFiler.Client/ApiKey.ActionFiler.Client.csproj" Id="3a0fc9a7-3bdd-4cce-9234-eabef6b16ce3" />
   <Project Path="ApiKey.ActionFilter.Service/ApiKey.ActionFilter.Service.csproj" Id="b807e0a2-b295-4f34-b67e-fe423a71ec03" />
+  <Project Path="ApiKey.Middleware.Client/ApiKey.Middleware.Client.csproj" Id="63e36692-47f4-4ab3-9403-330587764e30" />
   <Project Path="ApiKey.Middleware.Service/ApiKey.Middleware.Service.csproj" Id="25b073c6-1c7b-47a7-94c1-18208fdab9c2" />
-  <Project Path="BlazorClient/BlazorClient.csproj" Id="fd631418-39f9-4e78-b028-299c75381985" />
-  <Project Path="DemoClient/DemoClient.csproj" Id="af6a546d-b81f-47c0-87dc-22f7ae2bb8a1" />
 </Solution>
