@@ -2,16 +2,17 @@ using BlazorClient;
 using BlazorClient.Components;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 builder.Services.AddTransient<ApiKeyDelegatingHandler>();
 
+// Add API key to each http Client via httpHandler (Delegating Handler)
+// It is better way if your requirements grow.
+// 
+// the key is dynamically added to each and every individual HTTP call right before it leaves your application.
 builder.Services.AddHttpClient("ProtectedApi", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7123/");
 })
 .AddHttpMessageHandler<ApiKeyDelegatingHandler>();
-
 
 
 builder.Services.AddRazorComponents()
