@@ -7,7 +7,6 @@ namespace ApiService
     // Implements IAsyncActionFilter to run custom validation logic before and after controller actions execute
     public class ApiKeyAuthFilter : IAsyncActionFilter
     {
-
         private const string ApiKeyHeaderName = "X-API-KEY";
 
         // Core execution method required by the filter interface, handling asynchronous interception
