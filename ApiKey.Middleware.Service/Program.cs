@@ -10,7 +10,7 @@ builder.WebHost.ConfigureKestrel(options =>
 
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddEndpointsApiExplorer(); for minimal APIs, not needed for controllers
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
