@@ -11,7 +11,7 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services.AddScoped<ApiKeyAuthFilter>();
 
 builder.Services.AddControllers();
-//builder.Services.AddEndpointsApiExplorer(); for minimal APIs, not needed for controllers
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
