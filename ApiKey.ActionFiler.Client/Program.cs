@@ -9,7 +9,7 @@ builder.Services.AddTransient<ApiKeyDelegatingHandler>();
 // It is better way if your requirements grow.
 // 
 // the key is dynamically added to each and every individual HTTP call right before it leaves your application.
-builder.Services.AddHttpClient("ProtectedApi", client =>
+builder.Services.AddHttpClient("ApiClient", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7123/");
 })

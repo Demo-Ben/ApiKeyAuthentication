@@ -40,7 +40,7 @@ else
     {
         try
         {
-            var client = _clientFactory.CreateClient("ProtectedApi");
+            var client = _clientFactory.CreateClient("ApiClient");
             _forecasts = await client.GetFromJsonAsync<WeatherForecast[]>("api/weather");
         }
         catch (Exception ex)
