@@ -4,7 +4,6 @@
 
 <h1>API Key Authentication Workflow!</h1>
 
-
 <div class="container my-4">
     <div class="jumbotron bg-light p-5 rounded">
 
@@ -12,41 +11,56 @@
 
         <div class="card shadow-sm border-0">
             <div class="card-body">
+                <div class="row g-3">
 
-                <ol>
-                    <li>
-                        <strong>User Interaction</strong> — A user triggers an action in a Blazor component, which calls the named HttpClient.
-                    </li>
+                    <div class="col-md-6">
+                        <div class="p-3 border bg-white rounded h-100">
+                            <strong>User Interaction</strong> — A user triggers an action in a Blazor component, which calls the named HttpClient.
+                        </div>
+                    </div>
 
-                    <li>
-                        <strong>IHttpClientFactory</strong> — <code>CreateClient("ProtectedApi")</code> returns a client configured with
-                        <strong>ApiKeyDelegatingHandler</strong>.
-                    </li>
+                    <div class="col-md-6">
+                        <div class="p-3 border bg-white rounded h-100">
+                            <strong>IHttpClientFactory</strong> — <code>CreateClient("ProtectedApi")</code> returns a client configured with
+                            <strong>ApiKeyDelegatingHandler</strong>.
+                        </div>
+                    </div>
 
-                    <li>
-                        <strong>Delegating Handler Adds API Key</strong> — Before the request leaves the client,
-                        <code>ApiKeyDelegatingHandler.SendAsync()</code> injects:
-                        <br />
-                        <code>X-API-KEY: &lt;client key&gt;</code>
-                    </li>
+                    <div class="col-md-6">
+                        <div class="p-3 border bg-white rounded h-100">
+                            <strong>Delegating Handler Adds API Key</strong> — Before the request leaves the client,
+                            <code>ApiKeyDelegatingHandler.SendAsync()</code> injects:
+                            <br />
+                            <code>X-API-KEY: &lt;client key&gt;</code>
+                        </div>
+                    </div>
 
-                    <li>
-                        <strong>Request Sent to API</strong> — The HTTP request travels to the endpoint, e.g. <code>GET /api/weather</code>.
-                    </li>
+                    <div class="col-md-6">
+                        <div class="p-3 border bg-white rounded h-100">
+                            <strong>Request Sent to API</strong> — The HTTP request travels to the endpoint, e.g. <code>GET /api/weather</code>.
+                        </div>
+                    </div>
 
-                    <li>
-                        <strong>ASP.NET Core Filter Pipeline</strong> — <strong>ApiKeyAuthFilter</strong> runs before the controller:
-                        <ul>
-                            <li>If header missing → <strong>401 Unauthorized</strong></li>
-                            <li>If header present but incorrect → <strong>401 Unauthorized</strong></li>
-                            <li>If header matches server key → filter calls <code>next()</code> and controller executes</li>
-                        </ul>
-                    </li>
+                    <div class="col-md-6">
+                        <div class="p-3 border bg-white rounded h-100">
 
-                    <li>
-                        <strong>Response Returned</strong> — Controller returns data, HttpClient receives it, and the Blazor component renders the UI.
-                    </li>
-                </ol>
+                            <strong>ASP.NET Core Filter Pipeline</strong> — <strong>ApiKeyAuthFilter</strong> runs before the controller:
+                            <ul>
+                                <li>If header missing → <strong>401 Unauthorized</strong></li>
+                                <li>If header present but incorrect → <strong>401 Unauthorized</strong></li>
+                                <li>If header matches server key → filter calls <code>next()</code> and controller executes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="p-3 border bg-white rounded h-100">
+
+                            <strong>Response Returned</strong> — Controller returns data, HttpClient receives it, and the Blazor component renders the UI.
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
