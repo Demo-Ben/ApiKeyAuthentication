@@ -2,6 +2,52 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>API Key Authentication Workflow!</h1>
 
-Welcome to your new app.
+
+<div class="container my-4">
+    <div class="jumbotron bg-light p-5 rounded">
+
+        <p class="lead text-muted">This page describes how the Blazor client and ASP.NET Core API exchange authenticated requests using an API key.</p>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+
+                <ol>
+                    <li>
+                        <strong>User Interaction</strong> — A user triggers an action in a Blazor component, which calls the named HttpClient.
+                    </li>
+
+                    <li>
+                        <strong>IHttpClientFactory</strong> — <code>CreateClient("ProtectedApi")</code> returns a client configured with
+                        <strong>ApiKeyDelegatingHandler</strong>.
+                    </li>
+
+                    <li>
+                        <strong>Delegating Handler Adds API Key</strong> — Before the request leaves the client,
+                        <code>ApiKeyDelegatingHandler.SendAsync()</code> injects:
+                        <br />
+                        <code>X-API-KEY: &lt;client key&gt;</code>
+                    </li>
+
+                    <li>
+                        <strong>Request Sent to API</strong> — The HTTP request travels to the endpoint, e.g. <code>GET /api/weather</code>.
+                    </li>
+
+                    <li>
+                        <strong>ASP.NET Core Filter Pipeline</strong> — <strong>ApiKeyAuthFilter</strong> runs before the controller:
+                        <ul>
+                            <li>If header missing → <strong>401 Unauthorized</strong></li>
+                            <li>If header present but incorrect → <strong>401 Unauthorized</strong></li>
+                            <li>If header matches server key → filter calls <code>next()</code> and controller executes</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Response Returned</strong> — Controller returns data, HttpClient receives it, and the Blazor component renders the UI.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
