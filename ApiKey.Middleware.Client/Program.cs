@@ -9,7 +9,7 @@ builder.Services.AddRazorComponents()
 // Add API key global to all http Client via httpHandler
 builder.Services.AddHttpClient("ApiClient", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7154/");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:RemoteAPIUrl"] ?? "https://localhost:7154/");
     client.DefaultRequestHeaders.Add("X-API-KEY", "SuperSecretApiKey-12345");
 });
 
