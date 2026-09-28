@@ -2,6 +2,67 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1 class="display-4">Authentication by API key + Middleware!</h1>
 
-Welcome to your new app.
+<p>Below is the workflow overview for how API Key authentication operates using the <code>ApiKeyMiddleware</code>.</p>
+
+<hr style="margin: 2rem 0;" />
+
+<!-- Visual Workflow Diagram Section -->
+<section style="margin-bottom: 2.5rem;">
+    <h2>Visual Workflow Diagram</h2>
+    <p>This diagram outlines the complete request and validation journey from the Blazor client through the API pipeline.</p>
+    
+    <div style="text-align: center; margin-top: 1rem;">
+        <img src="ApikeyViaMiddlewareFlow.jpg" 
+             alt="ApiKeyMiddleware Workflow Diagram" 
+             style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+    </div>
+@* 
+    <div class="card-body bg-dark text-light rounded">
+                <h5 class="card-title text-info mb-3">Authentication Architecture Flow</h5>
+
+                <!-- Image Display -->
+                <img src="workflow.jpg" alt="JWT Authentication Workflow Diagram" class="img-fluid rounded shadow" style="max-height: 500px;" />
+            </div> *@
+</section>
+
+<!-- Text-Based Step-by-Step Workflow Section -->
+<section>
+    <h2>Step-by-Step Execution Flow</h2>
+    <p>The sequence of operations processed from top to bottom when an HTTP request hits the API:</p>
+
+    <pre style="background-color: #f8f9fa; padding: 1.25rem; border-radius: 6px; border: 1px solid #e9ecef; font-family: monospace; font-size: 0.9rem; overflow-x: auto; line-height: 1.5;">
+[ Blazor Client (Blazor Client) ]
+           │
+           │ Sends HTTP GET Request with "X-API-KEY" Header
+           │ client.DefaultRequestHeaders.Add("X-API-KEY", "SuperSecretApiKey-12345")
+           ▼
+[ ASP.NET Core API Pipeline (DemoApi) ]
+           │
+           │ Incoming request reaches middleware layer
+           ▼
+[ ApiKeyMiddleware ]
+           │
+           ├──► Step 1: Checks if request path is "/swagger" (Bypasses if true)
+           │
+           ├──► Step 2: Attempts to extract "X-API-KEY" from request headers
+           │            ├── If missing ──► Returns [ 401 Unauthorized ] (Stop)
+           │            └── If found   ──► Proceeds
+           │
+           └──► Step 3: Compares extracted key with configuration key (appsettings.json)
+                        ├── If invalid ──► Returns [ 401 Unauthorized ] (Stop)
+                        └── If valid   ──► Calls _next() to continue pipeline
+           │
+           ▼
+[ Controller & Action: WeatherForecastController ]
+           │
+           │ Executes business logic securely
+           ▼
+[ Data Generation / Return Response ]
+           │
+           │ Returns [ 200 OK ] with requested data payload
+           ▼
+[ Blazor Client receives the Weather Data ]
+    </pre>
+</section>
