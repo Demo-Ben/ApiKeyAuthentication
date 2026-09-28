@@ -11,7 +11,7 @@ builder.Services.AddTransient<ApiKeyDelegatingHandler>();
 // the key is dynamically added to each and every individual HTTP call right before it leaves your application.
 builder.Services.AddHttpClient("ApiClient", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7123/");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:RemoteApiUrl"] ?? "https://localhost:5000/");
 })
 .AddHttpMessageHandler<ApiKeyDelegatingHandler>();
 
