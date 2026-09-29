@@ -2,7 +2,7 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1 class="display-4">Authentication by API key + ApiKeyAuthFilter pipeline</h1>
+<h1 class="display-4">API Key Authentication via Pipeline</h1>
 <h2 class="display-6">Workflows: Blazor client and ASP.NET Core API exchange authenticated requests using an API key</h2>
 
 <div class="container my-4">
@@ -14,20 +14,22 @@
 
                     <div class="col-md-6">
                         <div class="p-3 border bg-white rounded h-100">
-                            <h5 class="text-primary"><strong>IHttpClientFactory</strong></h5>
+                            <h5 class="text-primary"><strong>1.IHttpClientFactory</strong></h5>
                             <p class="text-muted mb-0">
-                                <code>CreateClient("ApiClient")</code> returns a client configured with
-                                <strong>ApiKeyDelegatingHandler()</strong>
+                                Web client <code>CreateClient("ApiClient")</code> configured with
+                               <strong><code>.AddHttpMessageHandler(someHandler)</code></strong>
+                               <br>
+                               <code>here : someHandler = ApiKeyDelegatingHandler </code>
                             </p>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="p-3 border bg-white rounded h-100">
-                            <h5 class="text-primary"><strong>Delegating Handler Adds API Key</strong></h5>
+                            <h5 class="text-primary"><strong>2.Delegating Handler Adds API Key</strong></h5>
                             <p class="text-muted mb-0">
                                 Before the request leaves the client,
-                                <code>ApiKeyDelegatingHandler.SendAsync()</code> injects:
+                                <code>ApiKeyDelegatingHandler.SendAsync()</code> injects API key:
                                 <br />
                                 <code>X-API-KEY: &lt;client key&gt;</code>
                             </p>
@@ -36,9 +38,10 @@
  
                     <div class="col-md-6">
                         <div class="p-3 border bg-white rounded h-100">
-                            <h5 class="text-primary"><strong>Web API Filter Pipeline</strong></h5>
+                            <h5 class="text-primary"><strong>3.Web API Filter Pipeline</strong></h5>
                             <p class="text-muted mb-0">
-                                <code>ApiKeyAuthFilter()</code>> check  <code>X-API-KEY: &lt;client key&gt;</code> before the controller runs:
+                                The pipeline <code> ApiKeyAuthFilter()</code> is registered by AddScoped() in Web Api before startup.
+                                ApiKeyAuthFilter<code>.OnActionExecutionAsync()</code> will check <code>X-API-KEY: &lt;client key&gt;</code> before the controller runs:
                                 <ul>
                                     <li>If header missing → <strong>401 Unauthorized</strong></li>
                                     <li>If header present but incorrect → <strong>401 Unauthorized</strong></li>
@@ -50,11 +53,10 @@
 
                     <div class="col-md-6">
                         <div class="p-3 border bg-white rounded h-100">
-                            <h5 class="text-primary"><strong>Response Returned</strong></h5>
+                            <h5 class="text-primary"><strong>4.Response Returned</strong></h5>
                             <p class="text-muted mb-0">Controller returns data, HttpClient receives it, and the Blazor component renders the UI.</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
